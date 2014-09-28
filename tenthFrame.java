@@ -8,10 +8,26 @@ public class tenthFrame extends frame{
 		if(strikeBit>0){
 			if(strikeBit ==2){
 				System.out.println("보너스!");
-				frameTotal+=rolls.get(1).shoot();
+				 while(true){
+					 try{
+						 rolls.get(1).shoot();
+					 }catch(wrongInputException e){
+						 continue;
+					 }
+					 break;
+				 }
+				frameTotal +=rolls.get(1).score();
 			}
 			System.out.println("마지막!");
-			frameTotal+=bonusRoll.shoot();
+			 while(true){
+				 try{
+					 bonusRoll.shoot();
+				 }catch(wrongInputException e){
+					 continue;
+				 }
+				 break;
+			 }
+			frameTotal+=bonusRoll.score();
 		}
 	}
 	

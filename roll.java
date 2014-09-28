@@ -6,21 +6,22 @@ public class roll {
 	private int score;
 
 	
-	int shoot() {
+	int shoot() throws wrongInputException{
 		Scanner keyboard = new Scanner(System.in);
 		score=Integer.parseInt(keyboard.nextLine());
+		if(score>10|| score<0) throw new wrongInputException();
 		return score;
 	}
 	
 	
-	int spareChance(int previousRoll) {
+	int spareChance(int previousRoll) throws wrongInputException {
 		System.out.println("스페어 시도!");
 		
 		Scanner keyboard = new Scanner(System.in);
 		score=Integer.parseInt(keyboard.nextLine());
 		
-		while(previousRoll+score>10){
-			score=Integer.parseInt(keyboard.nextLine());
+		if(previousRoll+score>10){
+			throw new wrongInputException();
 		}
 		return score;	
 	}

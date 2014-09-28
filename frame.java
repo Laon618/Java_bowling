@@ -15,10 +15,26 @@ public class frame {
 	}
 	
 	 void shoot() {
-		frameTotal+=rolls.get(0).shoot();
+		 while(true){
+			 try{
+				 rolls.get(0).shoot();
+			 }catch(wrongInputException e){
+				 continue;
+			 }
+			 break;
+		 }
+		frameTotal+=rolls.get(0).score();
 		ballCount++;
 		if(frameTotal<10){
-			frameTotal +=rolls.get(1).spareChance(rolls.get(0).score());
+			 while(true){
+				 try{
+					 rolls.get(1).spareChance(rolls.get(0).score());
+				 }catch(wrongInputException e){
+					 continue;
+				 }
+				 break;
+			 }
+			frameTotal +=rolls.get(1).score();
 			ballCount++;
 		}
 		Checker();

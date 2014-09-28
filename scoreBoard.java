@@ -14,27 +14,12 @@ public class scoreBoard {
 	}
 	
 	
-	void shoot(int i) {
-		System.out.println((i+1) + " 번째 frame의 첫번째 공입니다!");
-		frames.get(i).shoot();
-		if(i>0)strikeChecker(i);
+	void shoot(int currentFrameIndex) {
+		System.out.println((currentFrameIndex+1) + " 번째 frame의 첫번째 공입니다!");
+		frames.get(currentFrameIndex).shoot();
+		if(currentFrameIndex>0)strikeChecker(currentFrameIndex);
 	}
 	
-
-
-//	private void strikeChecker(int currentFrame) {
-//		frame previousFrame = frame.get(currentFrame-1);
-//		if(frames.get(previousFrame).isSpare() || frames.get(previousFrame).isStrike()){
-//			frames.get(previousFrame).addToFrameTotal(frames.get(previousFrame).getFirstBallScore());
-//			if(frames.get(previousFrame).isStrike()){
-//				frames.get(previousFrame).addToFrameTotal(frames.get(currentFrame).getSecondBallScore());
-//				int prePreviousFrame = previousFrame -1;
-//				if(currentFrame>1 && frames.get(i-2).isStrike()){
-//					frames.get(i-2).addToFrameTotal(frames.get(currentFrame).getFirstBallScore());
-//				}
-//			}
-//		}
-//	}
 	
 	private void strikeChecker(int currentFrameIndex) {
 		frame currentFrame=frames.get(currentFrameIndex);
@@ -43,20 +28,21 @@ public class scoreBoard {
 			previousFrame.addToFrameTotal(currentFrame.getFirstBallScore());
 			if(previousFrame.isStrike()){
 				previousFrame.addToFrameTotal(currentFrame.getSecondBallScore());
-				if(currentFrameIndex>1)prePreviousFrameStrikeChecker(currentFrameIndex);
+				if(currentFrameIndex>1)
+					prePreviousFrameStrikeChecker(currentFrameIndex);
 			}
 		}
 	}
 
-	
+
 	private void prePreviousFrameStrikeChecker(int currentFrameIndex) {
 		frame prePreviousFrame = frames.get(currentFrameIndex-2);
 		frame currentFrame=frames.get(currentFrameIndex);
 		if(currentFrameIndex>1 && prePreviousFrame.isStrike()){
 			prePreviousFrame.addToFrameTotal(currentFrame.getFirstBallScore());
 		}
-	
-}
+
+	}
 
 
 	void printScoreBoard(int currentFrame) {
